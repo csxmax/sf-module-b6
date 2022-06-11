@@ -1,0 +1,17 @@
+- hosts: localserver
+  roles:
+    - ansible-modules-bitwarden
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Install Docker
+    apt:
+      name: docker.io
+      state: latest
+  - name: Pull an Hello-World image
+    docker_image:
+      name: hello-world
+      source: pull
+  - name: Run Hello-World
+    command: 'docker run hello-world'
+

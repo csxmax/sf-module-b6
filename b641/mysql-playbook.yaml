@@ -1,0 +1,17 @@
+- name: Install and run mysql service
+  hosts: localserver
+  gather_facts: true
+  become: true
+  roles:
+    - ansible-modules-bitwarden
+  tasks:
+    - name: Install packages
+      apt:
+        name:
+          - mysql-server
+        state: latest
+    - name: Start MySQL
+      systemd:
+        name: mysql
+        state: started
+        enabled: yes
